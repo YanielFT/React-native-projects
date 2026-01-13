@@ -13,11 +13,11 @@ export default function FAB({ position, label, onPress, onLongPress }: Props) {
     <Pressable
       onPress={() => {
         onPress?.();
-        Vibration.vibrate([0, 100]);
+        Vibration.vibrate([0, 20]);
       }}
       onLongPress={() => {
         onLongPress?.();
-        Vibration.vibrate([0, 20]);
+        Vibration.vibrate([0, 100]);
       }}
       style={({ pressed }) => [
         styles.floatingButtons,
