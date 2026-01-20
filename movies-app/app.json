@@ -1,11 +1,11 @@
 {
   "expo": {
-    "name": "navigation-app",
-    "slug": "navigation-app",
+    "name": "movies-app",
+    "slug": "movies-app",
     "version": "1.0.0",
     "orientation": "portrait",
     "icon": "./assets/images/icon.png",
-    "scheme": "navigationapp",
+    "scheme": "moviesapp",
     "userInterfaceStyle": "automatic",
     "newArchEnabled": true,
     "ios": {
@@ -19,8 +19,7 @@
         "monochromeImage": "./assets/images/android-icon-monochrome.png"
       },
       "edgeToEdgeEnabled": true,
-      "predictiveBackGestureEnabled": false,
-      "package": "com.yanielft.navigationapp"
+      "predictiveBackGestureEnabled": false
     },
     "web": {
       "output": "static",
@@ -44,12 +43,6 @@
     "experiments": {
       "typedRoutes": true,
       "reactCompiler": true
-    },
-    "extra": {
-      "router": {},
-      "eas": {
-        "projectId": "2c0e7e49-594b-4c3d-95cc-5c2172539e0a"
-      }
     }
   }
 }
