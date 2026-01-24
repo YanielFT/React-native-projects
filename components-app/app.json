@@ -1,11 +1,11 @@
 {
   "expo": {
-    "name": "movies-app",
-    "slug": "movies-app",
+    "name": "components-app",
+    "slug": "components-app",
     "version": "1.0.0",
     "orientation": "portrait",
     "icon": "./assets/images/icon.png",
-    "scheme": "moviesapp",
+    "scheme": "componentsapp",
     "userInterfaceStyle": "automatic",
     "newArchEnabled": true,
     "ios": {
@@ -19,8 +19,7 @@
         "monochromeImage": "./assets/images/android-icon-monochrome.png"
       },
       "edgeToEdgeEnabled": true,
-      "predictiveBackGestureEnabled": false,
-      "package": "com.yanielft.moviesapp"
+      "predictiveBackGestureEnabled": false
     },
     "web": {
       "output": "static",
@@ -44,12 +43,6 @@
     "experiments": {
       "typedRoutes": true,
       "reactCompiler": true
-    },
-    "extra": {
-      "router": {},
-      "eas": {
-        "projectId": "267ae4c3-12fa-437b-bcb3-1934ca004320"
-      }
     }
   }
 }
