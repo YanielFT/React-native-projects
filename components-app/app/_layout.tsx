@@ -1,22 +1,16 @@
 import { allRoutes } from "@/constants/Routes";
-import { useColorScheme } from "@/hooks/use-color-scheme";
+import { ThemeChangerProvider } from "@/hooks/context/ThemeChangerContext";
 import { useThemeColor } from "@/hooks/use-theme-color";
-import {
-  DarkTheme,
-  DefaultTheme,
-  ThemeProvider,
-} from "@react-navigation/native";
 import { Stack } from "expo-router";
 import { StatusBar } from "expo-status-bar";
 import { GestureHandlerRootView } from "react-native-gesture-handler";
 import "./global.css";
 export default function RootLayout() {
-  const colorScheme = useColorScheme();
   const backgroundColor = useThemeColor({}, "background");
 
   return (
     <GestureHandlerRootView style={{ flex: 1, backgroundColor }}>
-      <ThemeProvider value={colorScheme === "dark" ? DarkTheme : DefaultTheme}>
+      <ThemeChangerProvider>
         <Stack
           screenOptions={{
             headerShadowVisible: false,
@@ -38,12 +32,15 @@ export default function RootLayout() {
             <Stack.Screen
               key={route.name}
               name={route.name}
-              options={{ title: route.title }}
+              options={{
+                title: route.title,
+                headerShown: !route.title.includes("Slides"),
+              }}
             />
           ))}
         </Stack>
-        <StatusBar style="auto" />
-      </ThemeProvider>
+      </ThemeChangerProvider>
+      <StatusBar style="auto" />
     </GestureHandlerRootView>
   );
 }
