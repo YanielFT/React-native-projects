@@ -9,7 +9,7 @@ interface Props {
 
 export const movieDetails = async ({ id }: Props): Promise<CompleteMovie> => {
   try {
-    const { data } = await movieApi.get<MovieDetails>(`/${id}`);
+    const { data } = await movieApi.get<MovieDetails>(`/movie/${id}`);
 
     return MovieMapper.fromMovieDBToCompleteMovie(data);
   } catch (error) {

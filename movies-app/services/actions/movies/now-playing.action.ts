@@ -12,11 +12,14 @@ export interface Options {
 
 export const nowPlayingAction = async ({ page = 1, limit = 10 }: Options) => {
   try {
-    const { data } = await movieApi.get<NowPlayingResponse>("/now_playing", {
-      params: {
-        page: page,
+    const { data } = await movieApi.get<NowPlayingResponse>(
+      "/movie/now_playing",
+      {
+        params: {
+          page: page,
+        },
       },
-    });
+    );
     const dataFormatted = data.results.map(MovieMapper.fromMovieDBToMovie);
     return dataFormatted;
   } catch (error) {
@@ -27,7 +30,7 @@ export const nowPlayingAction = async ({ page = 1, limit = 10 }: Options) => {
 
 export const popularAction = async ({ page = 1, limit = 10 }: Options) => {
   try {
-    const { data } = await movieApi.get<PopularResponse>("/popular", {
+    const { data } = await movieApi.get<PopularResponse>("/movie/popular", {
       params: {
         page: page,
       },
@@ -42,7 +45,7 @@ export const popularAction = async ({ page = 1, limit = 10 }: Options) => {
 
 export const topRatedAction = async () => {
   try {
-    const { data } = await movieApi.get<PopularResponse>("/top_rated");
+    const { data } = await movieApi.get<PopularResponse>("/movie/top_rated");
     const dataFormatted = data.results.map(MovieMapper.fromMovieDBToMovie);
     return dataFormatted;
   } catch (error) {
@@ -53,7 +56,7 @@ export const topRatedAction = async () => {
 
 export const upComingAction = async () => {
   try {
-    const { data } = await movieApi.get<PopularResponse>("/upcoming");
+    const { data } = await movieApi.get<PopularResponse>("/movie/upcoming");
     const dataFormatted = data.results.map(MovieMapper.fromMovieDBToMovie);
     return dataFormatted;
   } catch (error) {

@@ -22,3 +22,10 @@ export interface Cast {
   character: string;
   avatar: string;
 }
+
+export interface MovieSearched {
+  id: number;
+  title: string;
+  image: string;
+  releaseDate: Date;
+}

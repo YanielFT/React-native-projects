@@ -47,7 +47,6 @@ const CastHorizonatalList = ({
     if (!isEndReached) return;
 
     isLoading.current = true;
-    console.log("Loading Next page!");
 
     loadNextPage?.();
   };

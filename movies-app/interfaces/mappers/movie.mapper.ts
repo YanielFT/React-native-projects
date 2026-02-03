@@ -1,7 +1,8 @@
-import { Cast, CompleteMovie, Movie } from "../movie.interface";
+import { Cast, CompleteMovie, Movie, MovieSearched } from "../movie.interface";
 import { CastResponse } from "../moviedb-credit";
 import { MovieDetails } from "../moviedb-details";
 import { Result } from "../moviedb-movies";
+import { SearchMovieResult } from "../search-movie";
 
 export class MovieMapper {
   static fromMovieDBToMovie = (movie: Result): Movie => {
@@ -41,6 +42,16 @@ export class MovieMapper {
       avatar: movie.profile_path
         ? `https://image.tmdb.org/t/p/w500${movie.profile_path}`
         : "https://i.stack.imgur.com/l60Hf.png", // esto en caso de no tener imagen
+    };
+  };
+  static fromMovieDBToMovieSearched = (
+    movie: SearchMovieResult,
+  ): MovieSearched => {
+    return {
+      id: movie.id,
+      title: movie.original_title, // Original title in the original language
+      releaseDate: new Date(movie.release_date),
+      image: `https://image.tmdb.org/t/p/w500${movie.poster_path}`,
     };
   };
 }

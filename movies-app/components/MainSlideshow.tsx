@@ -18,8 +18,8 @@ function MainSlideshow({ movies, setBackdropSelected }: Props) {
         snapEnabled
         pagingEnabled
         width={200}
-        autoPlayInterval={5000}
-        scrollAnimationDuration={600}
+        autoPlayInterval={2000}
+        scrollAnimationDuration={300}
         autoPlay
         data={movies}
         style={{

@@ -10,11 +10,12 @@ interface Props extends Options {
 
 export const creditOfMovies = async ({ id, page }: Props): Promise<Cast[]> => {
   try {
-    const { data } = await movieApi.get<CreditResponse>(`/${id}/credits`, {
-      params: { page },
-    });
-
-    console.log(data);
+    const { data } = await movieApi.get<CreditResponse>(
+      `/movie/${id}/credits`,
+      {
+        params: { page },
+      },
+    );
 
     return data.cast.map(MovieMapper.fromMovieDBToCredits);
   } catch (error) {

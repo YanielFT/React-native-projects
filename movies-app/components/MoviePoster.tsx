@@ -1,6 +1,7 @@
 import { router } from "expo-router";
 import React from "react";
-import { Image, Pressable } from "react-native";
+import { Pressable } from "react-native";
+import FadeInImage from "./images/FadeInImage";
 interface Props {
   id: number;
   image: string;
@@ -16,17 +17,17 @@ export const MoviePoster = ({
   return (
     <Pressable
       className={` ${className}  px-2 active:opacity-90 justify-center items-center`}
-      onPress={() => router.push(`/movie/${id}`)}
+      onPress={() => router.push(`/movies/${id}`)}
     >
-      <Image
-        resizeMode="stretch"
+      <FadeInImage
         style={{
           width: smallPoster ? 85 : 200,
           height: smallPoster ? 130 : 250,
           justifyContent: "flex-end",
+          resizeMode: "stretch",
         }}
         className="shadow-lg rounded-2xl w-full h-full"
-        source={{ uri: image }}
+        uri={image}
       />
     </Pressable>
   );

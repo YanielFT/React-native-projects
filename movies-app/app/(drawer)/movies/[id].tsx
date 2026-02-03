@@ -1,4 +1,5 @@
 import CastHorizonatalList from "@/components/CastHorizontalList";
+import MovieSplashScreen from "@/components/shared/MovieSplashScreen";
 import { formatter } from "@/helps/digitFormatted";
 import {
   useCreditMoviesDetails,
@@ -9,7 +10,6 @@ import { Redirect, router } from "expo-router";
 import { useLocalSearchParams } from "expo-router/build/hooks";
 import React from "react";
 import {
-  ActivityIndicator,
   Dimensions,
   ImageBackground,
   Pressable,
@@ -43,23 +43,7 @@ const MovieScreen = () => {
   });
 
   if (isLoading || isCreditLoading) {
-    return (
-      <View
-        style={{
-          flex: 1,
-          justifyContent: "center",
-          alignItems: "center",
-          backgroundColor: "black",
-        }}
-      >
-        <ActivityIndicator
-          size="large"
-          color="purple"
-          animating={true}
-          hidesWhenStopped={true}
-        />
-      </View>
-    );
+    return <MovieSplashScreen />;
   }
 
   return (
@@ -94,7 +78,7 @@ const MovieScreen = () => {
         <Pressable
           className="z-20"
           onPress={() => {
-            router.dismiss();
+            router.back();
           }}
           style={{ marginTop: top, marginLeft: 10 }}
         >

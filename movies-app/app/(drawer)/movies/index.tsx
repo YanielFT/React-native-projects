@@ -8,22 +8,32 @@ import {
   topRatedAction,
   upComingAction,
 } from "@/services/actions/movies/now-playing.action";
+import { Ionicons } from "@expo/vector-icons";
+import { DrawerActions } from "@react-navigation/native";
+import { LinearGradient } from "expo-linear-gradient";
+import { router, useNavigation, usePathname } from "expo-router";
 import { useRef, useState } from "react";
 import {
-  ActivityIndicator,
   Animated,
   Dimensions,
   ImageBackground,
+  Pressable,
   ScrollView,
-  Text,
   View,
 } from "react-native";
 import { useSafeAreaInsets } from "react-native-safe-area-context";
+
 const deviceHeight = Dimensions.get("window").height;
 
 export default function HomeScreen() {
+  const pathname = usePathname();
   const safeArea = useSafeAreaInsets();
   const [pendingImage, setPendingImage] = useState("");
+  const navigation = useNavigation();
+  const onToggleDrawer = () => {
+    navigation.dispatch(DrawerActions.toggleDrawer);
+  };
+
   const { data, isLoading } = useMovies({
     queryFn: () => nowPlayingAction({ page: 2 }),
     queryKey: "movies",
@@ -31,7 +41,7 @@ export default function HomeScreen() {
 
   const [currentImage, setCurrentImage] = useState<Movie["backdrop"]>("");
 
-  const opacity = useRef(new Animated.Value(1)).current;
+  const opacity = useRef(new Animated.Value(0)).current;
 
   const {
     fetchNextPage: fetchPopularNextPage,
@@ -60,45 +70,44 @@ export default function HomeScreen() {
     queryKey: "upComing",
   });
 
-  if (
-    isLoading &&
-    data &&
-    isPopularLoading &&
-    pupularData &&
-    isTopRatedLoading &&
-    topRatedData &&
-    pupularData &&
-    isUpComingLoading &&
-    upComingData
-  ) {
-    return (
-      <View
-        style={{
-          flex: 1,
-          justifyContent: "center",
-          alignItems: "center",
-          backgroundColor: "black",
-        }}
-      >
-        <ActivityIndicator
-          size="large"
-          color="purple"
-          animating={true}
-          hidesWhenStopped={true}
-        />
-      </View>
-    );
-  }
-
   const changeImage = (newImage: string) => {
     setPendingImage(newImage);
   };
 
+  const toggleSearchModal = () => {
+    if (pathname === "/movies/modal-search") {
+      router.back();
+    } else {
+      router.push("/movies/modal-search");
+    }
+  };
+
   return (
     <>
+      {/* Drawer action */}
+      <Pressable
+        onPress={onToggleDrawer}
+        style={{ marginTop: safeArea.top }}
+        className=" absolute z-50 items-center justify-center w-12 h-12 p-2  left-5 top-5 50 rounded-full bg-black "
+      >
+        <Ionicons size={20} color="white" name={"grid-outline"} />
+      </Pressable>
+      <View
+        style={{ marginTop: safeArea.top }}
+        className=" absolute items-center justify-center w-12 h-12 p-2  right-5 top-5 z-50 rounded-full bg-black "
+      >
+        <Ionicons
+          size={20}
+          className="z-50"
+          color="white"
+          onPress={toggleSearchModal}
+          name={"search-outline"}
+        />
+      </View>
+
       <ScrollView
         style={{ flex: 1 }}
-        contentContainerStyle={{ paddingTop: safeArea.top }}
+        contentContainerStyle={{ paddingTop: safeArea.top + 20 }}
         showsVerticalScrollIndicator={false}
         className="bg-black relative"
       >
@@ -109,9 +118,9 @@ export default function HomeScreen() {
             top: 0,
             left: 0,
             width: "100%",
-            height: deviceHeight * 0.6,
+            height: deviceHeight * 0.7,
           }}
-          imageStyle={{ resizeMode: "cover", height: deviceHeight * 0.6 }}
+          imageStyle={{ resizeMode: "cover", height: deviceHeight * 0.7 }}
         >
           {pendingImage ? (
             <Animated.Image
@@ -119,7 +128,7 @@ export default function HomeScreen() {
               style={{
                 position: "absolute",
                 width: "100%",
-                height: deviceHeight * 0.6,
+                height: deviceHeight * 0.7,
                 opacity,
               }}
               onLoadEnd={() => {
@@ -134,20 +143,21 @@ export default function HomeScreen() {
             />
           ) : null}
         </ImageBackground>
-        <View
+
+        <LinearGradient
+          colors={["transparent", "black"]}
+          start={{ x: 0, y: 0 }}
+          end={{ x: 0, y: 1 }}
           style={{
-            height: deviceHeight * 0.65,
+            height: deviceHeight * 0.7,
             position: "absolute",
             top: 0,
             left: 0,
             width: "100%",
             zIndex: 10,
-            backgroundColor: "rgba(0,0,0,0.3)",
           }}
         />
-        <Text className="text-2xl z-20 font-acme-regular text-white px-4 mb-2 text-center">
-          Movies
-        </Text>
+
         {/* Carousel de imágenes */}
         <MainSlideshow
           movies={data?.pages.flat() ?? []}
