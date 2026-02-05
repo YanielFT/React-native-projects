@@ -10,7 +10,7 @@ const screenWidth = Dimensions.get("window").width;
 
 export default function RootLayout() {
   return (
-    <GestureHandlerRootView>
+    <GestureHandlerRootView style={{ flex: 1 }}>
       <Drawer
         drawerContent={CustomDrawer}
         screenOptions={{

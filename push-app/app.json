@@ -1,11 +1,11 @@
 {
   "expo": {
-    "name": "movies-app",
-    "slug": "movies-app",
+    "name": "push-app",
+    "slug": "push-app",
     "version": "1.0.0",
     "orientation": "portrait",
     "icon": "./assets/images/icon.png",
-    "scheme": "moviesapp",
+    "scheme": "pushapp",
     "userInterfaceStyle": "automatic",
     "newArchEnabled": true,
     "ios": {
@@ -13,24 +13,32 @@
     },
     "android": {
       "adaptiveIcon": {
-        "backgroundColor": "#E6F4FE"
+        "backgroundColor": "#E6F4FE",
+        "foregroundImage": "./assets/images/android-icon-foreground.png",
+        "backgroundImage": "./assets/images/android-icon-background.png",
+        "monochromeImage": "./assets/images/android-icon-monochrome.png"
       },
       "edgeToEdgeEnabled": true,
       "predictiveBackGestureEnabled": false,
-      "package": "com.yanielft.moviesapp"
+      "package": "com.yanielft.pushapp"
     },
     "web": {
       "output": "static",
       "favicon": "./assets/images/favicon.png"
     },
     "plugins": [
+      "expo-notifications",
       "expo-router",
       [
         "expo-splash-screen",
         {
           "image": "./assets/images/splash-icon.png",
+          "imageWidth": 200,
           "resizeMode": "contain",
-          "backgroundColor": "#070707"
+          "backgroundColor": "#ffffff",
+          "dark": {
+            "backgroundColor": "#000000"
+          }
         }
       ]
     ],
@@ -41,8 +49,9 @@
     "extra": {
       "router": {},
       "eas": {
-        "projectId": "267ae4c3-12fa-437b-bcb3-1934ca004320"
+        "projectId": "8cbf2edf-b078-4171-b1b0-6ee8ca35a786"
       }
-    }
+    },
+    "owner": "yanielft"
   }
 }
